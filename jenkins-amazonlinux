@@ -22,3 +22,14 @@ sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io-2023.key
 #You can check the status of the Jenkins service using the command:
 
  sudo systemctl status jenkins
+# Add Jenkins user to docker group
+sudo usermod -aG docker jenkins
+
+# Restart Jenkins to apply group changes
+sudo systemctl restart jenkins
+
+# Wait for Jenkins to restart (30 seconds)
+sleep 30
+
+# Verify Jenkins can access Docker
+sudo -u jenkins docker ps
